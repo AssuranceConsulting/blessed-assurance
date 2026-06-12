@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assurance Consulting LLC — Business Intelligence Consulting</title>
+  <meta name="description" content="Assurance Consulting LLC delivers business intelligence, data strategy, and performance consulting to organizations ready to compete on insight." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --slate:      #264762;
+      --slate-dark: #1a3349;
+      --navy:       #0D2438;
+      --off-white:  #F5F0E8;
+      --terra:      #C4714A;
+      --terra-dark: #a55c38;
+      --white:      #FFFFFF;
+      --gray-mid:   #8a9aaa;
+      --gray-line:  #d4cec5;
+
+      --font-display: 'Cormorant Garant', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+
+      --max-w: 1200px;
+      --nav-h: 72px;
+    }
+
+    /* ─── RESET ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--navy);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ─── NAV ────────────────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      transition: background 0.3s;
+    }
+    #nav.scrolled { background: var(--navy); box-shadow: 0 2px 16px rgba(0,0,0,0.3); }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 28px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    /* Logo anchored left */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .nav-logo img { height: 40px; width: auto; }
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+    .nav-logo-text span {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+    /* Nav links — centred in the remaining space */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex: 1;
+      justify-content: center;
+    }
+    .nav-links a {
+      font-size: 0.76rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* Search bar */
+    .nav-search {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 4px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .nav-search:focus-within {
+      background: rgba(255,255,255,0.13);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .nav-search input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      padding: 7px 10px;
+      width: 160px;
+      transition: width 0.3s;
+    }
+    .nav-search input::placeholder { color: rgba(255,255,255,0.4); }
+    .nav-search input:focus { width: 200px; }
+    .nav-search button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 7px 10px;
+      color: rgba(255,255,255,0.5);
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    .nav-search button:hover { color: var(--white); }
+
+    /* CTA button */
+    .nav-cta {
+      background: var(--terra);
+      color: var(--white) !important;
+      padding: 9px 20px;
+      font-size: 0.72rem !important;
+      letter-spacing: 0.1em !important;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--terra-dark) !important; }
+
+    /* hamburger */
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; margin-left: auto; flex-shrink: 0; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
+    .nav-mobile { display: none; }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: var(--slate);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding-top: var(--nav-h);
+    }
+
+    /* architectural diagonal line pattern */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          135deg,
+          rgba(255,255,255,0.03) 0px,
+          rgba(255,255,255,0.03) 1px,
+          transparent 1px,
+          transparent 80px
+        );
+      pointer-events: none;
+    }
+    /* terracotta accent bar */
+    #hero::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 30%; bottom: 30%;
+      width: 4px;
+      background: var(--terra);
+      opacity: 0.9;
+    }
+
+    .hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 80px 32px 80px 64px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-text {}
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 20px;
+    }
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+    .hero-headline em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--off-white);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--terra);
+      color: var(--white);
+      padding: 14px 32px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--terra-dark); transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.35);
+      color: var(--white);
+      padding: 14px 32px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.06); }
+
+    .hero-logo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-logo-wrap img {
+      width: min(340px, 100%);
+      opacity: 0.92;
+      filter: drop-shadow(0 8px 40px rgba(0,0,0,0.3));
+      animation: logoFloat 6s ease-in-out infinite;
+    }
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    /* ─── STAT BAR ───────────────────────────────────────────── */
+    #stats {
+      background: var(--navy);
+      padding: 40px 32px;
+    }
+    .stats-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    .stat-item { padding: 8px; border-left: 1px solid rgba(255,255,255,0.1); }
+    .stat-item:first-child { border-left: none; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--terra);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-top: 6px;
+    }
+
+    /* ─── SECTION SHARED ─────────────────────────────────────── */
+    section { padding: 96px 32px; }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 16px;
+    }
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--navy);
+      margin-bottom: 24px;
+    }
+    .section-heading em { font-style: italic; }
+    .section-lead {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: #4a5a6a;
+      max-width: 620px;
+      line-height: 1.75;
+      margin-bottom: 56px;
+    }
+
+    /* ─── ABOUT ──────────────────────────────────────────────── */
+    #about { background: var(--off-white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-accent-box {
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: 160px;
+      height: 160px;
+      border: 2px solid var(--terra);
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .about-card {
+      background: var(--slate);
+      padding: 48px 40px;
+      color: var(--white);
+    }
+    .about-card-quote {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--off-white);
+      margin-bottom: 24px;
+      border-left: 3px solid var(--terra);
+      padding-left: 20px;
+    }
+    .about-card-attr {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+    .about-body {
+      font-size: 1rem;
+      font-weight: 300;
+      color: #4a5a6a;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .about-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .pillar {
+      border-left: 2px solid var(--terra);
+      padding-left: 14px;
+    }
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .pillar-desc {
+      font-size: 0.82rem;
+      color: #6a7a8a;
+      line-height: 1.5;
+    }
+
+    /* ─── SERVICES ───────────────────────────────────────────── */
+    #services { background: var(--white); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--gray-line);
+    }
+    .service-card {
+      background: var(--white);
+      padding: 40px 36px;
+      transition: background 0.25s;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--terra);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+      transform-origin: left;
+    }
+    .service-card:hover { background: var(--off-white); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 24px;
+      color: var(--slate);
+    }
+    .service-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .service-desc {
+      font-size: 0.9rem;
+      color: #5a6a7a;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .service-link {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terra);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .service-card:hover .service-link { gap: 10px; }
+
+    /* ─── INDUSTRIES ─────────────────────────────────────────── */
+    #industries { background: var(--navy); padding: 80px 32px; }
+    #industries .section-heading { color: var(--white); }
+    #industries .section-lead { color: rgba(255,255,255,0.6); }
+    .industries-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+    .industry-item {
+      background: var(--navy);
+      padding: 28px 24px;
+      border-bottom: 2px solid transparent;
+      transition: background 0.2s, border-color 0.2s;
+      cursor: default;
+    }
+    .industry-item:hover { background: var(--slate-dark); border-color: var(--terra); }
+    .industry-num {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: var(--terra);
+      margin-bottom: 10px;
+    }
+    .industry-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--white);
+    }
+
+    /* ─── PROCESS ────────────────────────────────────────────── */
+    #process { background: var(--off-white); }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: var(--gray-line);
+    }
+    .process-step { padding: 0 24px; position: relative; }
+    .step-dot {
+      width: 56px;
+      height: 56px;
+      background: var(--white);
+      border: 2px solid var(--slate);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--slate);
+      position: relative;
+      z-index: 1;
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .step-desc {
+      font-size: 0.88rem;
+      color: #6a7a8a;
+      line-height: 1.65;
+    }
+
+    /* ─── INSIGHTS ───────────────────────────────────────────── */
+    #insights { background: var(--white); }
+    .insights-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+    }
+    .insight-card { border-top: 2px solid var(--gray-line); padding-top: 24px; }
+    .insight-card:first-child { border-color: var(--terra); }
+    .insight-tag {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 12px;
+    }
+    .insight-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .insight-desc {
+      font-size: 0.88rem;
+      color: #6a7a8a;
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+    .insight-date {
+      font-size: 0.75rem;
+      color: var(--gray-mid);
+    }
+
+    /* ─── CONTACT ────────────────────────────────────────────── */
+    #contact { background: var(--slate); padding: 96px 32px; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-info {}
+    .contact-info .section-eyebrow { color: var(--terra); }
+    .contact-info .section-heading { color: var(--white); }
+    .contact-info .section-lead { color: rgba(255,255,255,0.65); margin-bottom: 40px; }
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .contact-detail-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--terra);
+    }
+    .contact-detail-text {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+    }
+    .contact-detail-text strong {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 2px;
+    }
+
+    /* form */
+    .contact-form { background: var(--white); padding: 48px 40px; }
+    .form-heading {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 28px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6a7a8a;
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--gray-line);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--navy);
+      background: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--slate); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-note {
+      font-size: 0.76rem;
+      color: #8a9aaa;
+      margin-bottom: 20px;
+    }
+    .form-success {
+      display: none;
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      padding: 16px;
+      color: #2e7d32;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    #footer { background: var(--navy); padding: 60px 32px 32px; }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand img { height: 48px; margin-bottom: 16px; }
+    .footer-brand-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+    .footer-col-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 16px;
+    }
+    .footer-col-links li { margin-bottom: 10px; }
+    .footer-col-links a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+    .footer-col-links a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.65); }
+
+    /* ─── SCROLL ANIMATION ───────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; padding: 60px 24px; }
+      .hero-logo-wrap { display: none; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .industries-list { grid-template-columns: repeat(2, 1fr); }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .process-steps::before { display: none; }
+      .insights-grid { grid-template-columns: 1fr 1fr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .nav-search { display: none; }
+      .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-mobile {
+        position: fixed;
+        top: var(--nav-h); left: 0; right: 0;
+        background: var(--navy);
+        padding: 24px 32px;
+        flex-direction: column;
+        gap: 0;
+        border-top: 1px solid rgba(255,255,255,0.08);
+      }
+      .nav-mobile.open { display: flex; }
+      /* mobile search inside menu */
+      .nav-mobile .mobile-search {
+        display: flex;
+        align-items: center;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.14);
+        border-radius: 4px;
+        margin-bottom: 8px;
+      }
+      .nav-mobile .mobile-search input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--white);
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        padding: 10px 12px;
+        width: 100%;
+      }
+      .nav-mobile .mobile-search input::placeholder { color: rgba(255,255,255,0.4); }
+      .nav-mobile .mobile-search button {
+        background: none; border: none; cursor: pointer;
+        padding: 10px 12px; color: rgba(255,255,255,0.5);
+        display: flex; align-items: center;
+      }
+      .nav-mobile a {
+        display: block;
+        padding: 14px 0;
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.75);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        transition: color 0.2s;
+      }
+      .nav-mobile a:hover { color: var(--white); }
+      .nav-mobile .nav-cta { display: block; background: var(--terra); color: var(--white); margin-top: 16px; text-align: center; border-bottom: none; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .industries-list { grid-template-columns: 1fr 1fr; }
+      .insights-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 64px 20px; }
+      #contact { padding: 64px 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-logo-wrap img { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="ACLogo.png" alt="Assurance Consulting LLC logo" />
+        <div class="nav-logo-text">
+          Assurance Consulting
+          <span>LLC</span>
+        </div>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#insights">Insights</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-search" role="search">
+        <input type="search" placeholder="Search…" aria-label="Search site" />
+        <button type="button" aria-label="Submit search">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="6.5" cy="6.5" r="4.5"/>
+            <path d="M10.5 10.5l3 3"/>
+          </svg>
+        </button>
+      </div>
+
+      <a href="#contact" class="nav-cta">Get Started</a>
+
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobile(this)">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav-mobile" id="navMobile" aria-label="Mobile navigation">
+      <div class="mobile-search">
+        <input type="search" placeholder="Search…" aria-label="Search site" />
+        <button type="button" aria-label="Submit search">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="6.5" cy="6.5" r="4.5"/><path d="M10.5 10.5l3 3"/>
+          </svg>
+        </button>
+      </div>
+      <a href="#about" onclick="closeMobile()">About</a>
+      <a href="#services" onclick="closeMobile()">Services</a>
+      <a href="#industries" onclick="closeMobile()">Industries</a>
+      <a href="#insights" onclick="closeMobile()">Insights</a>
+      <a href="#contact" onclick="closeMobile()">Contact</a>
+      <a href="#contact" class="nav-cta" onclick="closeMobile()">Get Started</a>
+    </nav>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section id="hero" aria-label="Hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Business Intelligence Consulting</p>
+        <h1 class="hero-headline">
+          Decisions built on<br><em>real intelligence.</em>
+        </h1>
+        <p class="hero-sub">
+          Assurance Consulting LLC helps organizations transform raw data into strategic advantage — delivering clarity when complexity is highest and the stakes are real.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Start a Conversation</a>
+          <a href="#services" class="btn-ghost">Our Services</a>
+        </div>
+      </div>
+      <div class="hero-logo-wrap" aria-hidden="true">
+        <img src="ACLogo.png" alt="" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <div id="stats" aria-label="Key figures">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Client-First Approach</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">BI</div>
+        <div class="stat-label">Specialist Focus</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">End-to-End</div>
+        <div class="stat-label">Delivery Model</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">ROI</div>
+        <div class="stat-label">Measurable Outcomes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about" aria-labelledby="about-heading">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-visual reveal">
+          <div class="about-accent-box"></div>
+          <div class="about-card">
+            <blockquote class="about-card-quote">
+              "Without data, you're just another person with an opinion."
+            </blockquote>
+            <p class="about-card-attr">— W. Edwards Deming</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <p class="section-eyebrow">Who We Are</p>
+          <h2 id="about-heading" class="section-heading">
+            Built on <em>assurance.</em><br>Powered by intelligence.
+          </h2>
+          <p class="about-body">
+            Assurance Consulting LLC is a business intelligence consulting firm committed to helping organizations make better decisions, faster. We partner with leadership teams to assess their data landscape, build robust reporting and analytics infrastructure, and surface the insights that drive real performance.
+          </p>
+          <p class="about-body">
+            We believe that lasting competitive advantage comes not from having more data — but from understanding it more clearly than your competitors do.
+          </p>
+          <div class="about-pillars">
+            <div class="pillar">
+              <div class="pillar-title">Integrity</div>
+              <div class="pillar-desc">We report what the data says, not what clients want to hear.</div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-title">Precision</div>
+              <div class="pillar-desc">Every analysis is traceable, repeatable, and defensible.</div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-title">Partnership</div>
+              <div class="pillar-desc">We integrate with your team, not just deliver a report.</div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-title">Impact</div>
+              <div class="pillar-desc">We measure our success by the decisions we enable.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SERVICES ═══ -->
+  <section id="services" aria-labelledby="services-heading">
+    <div class="section-inner">
+      <p class="section-eyebrow">What We Do</p>
+      <h2 id="services-heading" class="section-heading">
+        Services that <em>drive decisions.</em>
+      </h2>
+      <p class="section-lead">
+        From strategy through execution, we deliver business intelligence solutions that give leaders the clarity to act with confidence.
+      </p>
+    </div>
+    <div class="section-inner" style="padding-top:0;">
+      <div class="services-grid">
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <rect x="6" y="6" width="32" height="32" rx="2"/>
+            <polyline points="14,30 20,22 26,26 34,16"/>
+            <circle cx="34" cy="16" r="2" fill="currentColor"/>
+          </svg>
+          <h3 class="service-title">BI Strategy &amp; Roadmapping</h3>
+          <p class="service-desc">We assess your current analytics maturity and co-develop a prioritized roadmap aligned to your strategic objectives — ensuring every investment in data delivers measurable value.</p>
+          <span class="service-link">Learn More →</span>
+        </div>
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <ellipse cx="22" cy="14" rx="14" ry="5"/>
+            <path d="M8 14v8c0 2.76 6.27 5 14 5s14-2.24 14-5v-8"/>
+            <path d="M8 22v8c0 2.76 6.27 5 14 5s14-2.24 14-5v-8"/>
+          </svg>
+          <h3 class="service-title">Data Architecture &amp; Warehousing</h3>
+          <p class="service-desc">We design and implement scalable data warehouses, lakes, and lakehouse architectures that consolidate your disparate sources into a single, reliable source of truth.</p>
+          <span class="service-link">Learn More →</span>
+        </div>
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <rect x="6" y="10" width="32" height="24" rx="2"/>
+            <path d="M6 18h32"/>
+            <path d="M16 10v8M28 10v8"/>
+            <path d="M12 26h4M20 26h4M28 26h4"/>
+          </svg>
+          <h3 class="service-title">Dashboard &amp; Reporting</h3>
+          <p class="service-desc">We build executive dashboards and operational reports in Power BI, Tableau, or your preferred platform — designed for clarity, speed, and real-time decision-making.</p>
+          <span class="service-link">Learn More →</span>
+        </div>
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="22" cy="22" r="14"/>
+            <path d="M22 8v14l8 8"/>
+          </svg>
+          <h3 class="service-title">Predictive Analytics</h3>
+          <p class="service-desc">We develop and deploy statistical and machine learning models that move your organization from describing the past to anticipating the future — with explainable, auditable results.</p>
+          <span class="service-link">Learn More →</span>
+        </div>
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M22 6L6 16v12l16 10 16-10V16z"/>
+            <path d="M22 6v22M6 16l16 6 16-6"/>
+          </svg>
+          <h3 class="service-title">Data Governance &amp; Quality</h3>
+          <p class="service-desc">We establish governance frameworks, data cataloging, lineage tracking, and quality controls that ensure your organization can trust the numbers behind every decision.</p>
+          <span class="service-link">Learn More →</span>
+        </div>
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="16" cy="16" r="6"/>
+            <circle cx="30" cy="28" r="6"/>
+            <path d="M20 18l6 6"/>
+            <path d="M30 14h4M36 14h-4v4"/>
+            <path d="M10 30h-4M8 30h4v-4"/>
+          </svg>
+          <h3 class="service-title">Analytics Enablement &amp; Training</h3>
+          <p class="service-desc">We transfer capability into your organization through tailored training, embedded analytics coaches, and self-service frameworks that make your team analytically self-sufficient.</p>
+          <span class="service-link">Learn More →</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INDUSTRIES ═══ -->
+  <section id="industries" aria-labelledby="industries-heading">
+    <div class="section-inner">
+      <p class="section-eyebrow">Sectors We Serve</p>
+      <h2 id="industries-heading" class="section-heading">
+        Industry expertise that <em>matters.</em>
+      </h2>
+      <p class="section-lead">
+        Business intelligence isn't one-size-fits-all. We bring sector-specific knowledge that lets us ask better questions, model the right metrics, and deliver insights that fit your competitive reality.
+      </p>
+      <div class="industries-list">
+        <div class="industry-item reveal"><div class="industry-num">01</div><div class="industry-name">Financial Services</div></div>
+        <div class="industry-item reveal"><div class="industry-num">02</div><div class="industry-name">Healthcare &amp; Life Sciences</div></div>
+        <div class="industry-item reveal"><div class="industry-num">03</div><div class="industry-name">Manufacturing &amp; Supply Chain</div></div>
+        <div class="industry-item reveal"><div class="industry-num">04</div><div class="industry-name">Retail &amp; Consumer Goods</div></div>
+        <div class="industry-item reveal"><div class="industry-num">05</div><div class="industry-name">Government &amp; Public Sector</div></div>
+        <div class="industry-item reveal"><div class="industry-num">06</div><div class="industry-name">Technology &amp; SaaS</div></div>
+        <div class="industry-item reveal"><div class="industry-num">07</div><div class="industry-name">Energy &amp; Utilities</div></div>
+        <div class="industry-item reveal"><div class="industry-num">08</div><div class="industry-name">Professional Services</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROCESS ═══ -->
+  <section id="process" aria-labelledby="process-heading">
+    <div class="section-inner">
+      <p class="section-eyebrow">How We Work</p>
+      <h2 id="process-heading" class="section-heading">
+        A disciplined <em>engagement model.</em>
+      </h2>
+      <p class="section-lead">Every engagement follows a proven methodology built to minimize risk, maximize adoption, and deliver measurable results on a predictable timeline.</p>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="step-dot">1</div>
+          <h3 class="step-title">Discover</h3>
+          <p class="step-desc">We audit your current data assets, systems, and analytical capability to understand your starting point and define a shared baseline of opportunity.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-dot">2</div>
+          <h3 class="step-title">Design</h3>
+          <p class="step-desc">We co-develop an architecture and analytics blueprint that aligns to your business priorities, technology stack, and team's capacity to adopt.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-dot">3</div>
+          <h3 class="step-title">Build</h3>
+          <p class="step-desc">Our consultants work alongside your team — in sprints — to implement, test, and validate data pipelines, models, and dashboards in your environment.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-dot">4</div>
+          <h3 class="step-title">Enable</h3>
+          <p class="step-desc">We don't disappear at go-live. We train, document, and remain available to ensure your organization owns and scales its new analytical capabilities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INSIGHTS ═══ -->
+  <section id="insights" aria-labelledby="insights-heading">
+    <div class="section-inner">
+      <p class="section-eyebrow">Perspectives</p>
+      <h2 id="insights-heading" class="section-heading">
+        Insights from <em>the field.</em>
+      </h2>
+      <p class="section-lead">Practical thinking on business intelligence, data strategy, and the decisions that shape competitive organizations.</p>
+      <div class="insights-grid">
+        <div class="insight-card reveal">
+          <div class="insight-tag">Data Strategy</div>
+          <h3 class="insight-title">Why Most BI Initiatives Fail Before They Begin</h3>
+          <p class="insight-desc">The failure point for most analytics projects isn't technology — it's alignment. Before a single dashboard is built, the right questions need to be agreed upon at the leadership level.</p>
+          <div class="insight-date">Coming Soon</div>
+        </div>
+        <div class="insight-card reveal">
+          <div class="insight-tag">Governance</div>
+          <h3 class="insight-title">The Hidden Cost of Low-Quality Data</h3>
+          <p class="insight-desc">Organizations routinely underestimate what bad data costs them — in analyst hours, flawed decisions, and eroded trust in reporting. Here's how to quantify and address it.</p>
+          <div class="insight-date">Coming Soon</div>
+        </div>
+        <div class="insight-card reveal">
+          <div class="insight-tag">Executive Briefing</div>
+          <h3 class="insight-title">What Your CFO Actually Needs from a BI Dashboard</h3>
+          <p class="insight-desc">Finance leaders don't need more data — they need fewer, better-defined metrics delivered with speed and traceability. A framework for designing dashboards that get used.</p>
+          <div class="insight-date">Coming Soon</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact" aria-labelledby="contact-heading">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p class="section-eyebrow">Get In Touch</p>
+          <h2 id="contact-heading" class="section-heading">
+            Let's talk about your <em>data.</em>
+          </h2>
+          <p class="section-lead">Whether you're starting a BI initiative, rebuilding a reporting stack, or just trying to understand what your data is telling you — we'd like to hear about it.</p>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 4l6 5 6-5"/><rect x="1" y="3" width="14" height="10" rx="1.5"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Email</strong>
+              <a href="mailto:info@assurancesconsulting.com" style="color:rgba(255,255,255,0.7); text-decoration:none;">info@assurancesconsulting.com</a>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 1C5.24 1 3 3.24 3 6c0 4 5 9 5 9s5-5 5-9c0-2.76-2.24-5-5-5zm0 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Location</strong>
+              United States
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="1" y="1" width="14" height="14" rx="2"/><path d="M5 8h6M8 5v6"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>LinkedIn</strong>
+              <a href="https://linkedin.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.7);">Assurance Consulting LLC</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 
+          LEAD CAPTURE FORM
+          Replace YOUR_FORM_ID below with your Formspree endpoint after signing up at formspree.io
+          e.g. action="https://formspree.io/f/xabc1234"
+          Formspree is free, works with GitHub Pages, and emails you every submission.
+        -->
+        <div class="contact-form reveal">
+          <h3 class="form-heading">Send us a message</h3>
+          <div class="form-success" id="formSuccess" role="alert">
+            ✓ Thank you — we'll be in touch within one business day.
+          </div>
+          <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" required placeholder="Jane" />
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" required placeholder="Smith" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Business Email *</label>
+              <input type="email" id="email" name="email" required placeholder="jane@company.com" />
+            </div>
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" placeholder="Acme Corp" />
+            </div>
+            <div class="form-group">
+              <label for="interest">Area of Interest</label>
+              <select id="interest" name="interest">
+                <option value="" disabled selected>Select a service area…</option>
+                <option>BI Strategy &amp; Roadmapping</option>
+                <option>Data Architecture &amp; Warehousing</option>
+                <option>Dashboard &amp; Reporting</option>
+                <option>Predictive Analytics</option>
+                <option>Data Governance &amp; Quality</option>
+                <option>Analytics Enablement &amp; Training</option>
+                <option>General Inquiry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">How can we help? *</label>
+              <textarea id="message" name="message" required placeholder="Tell us about your data challenge or goal…"></textarea>
+            </div>
+            <p class="form-note">We respond to all inquiries within one business day.</p>
+            <button type="submit" class="btn-primary" style="width:100%; text-align:center; cursor:pointer; border:none; font-family:var(--font-body);">
+              Submit Inquiry
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer id="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="ACLogo.png" alt="Assurance Consulting LLC" />
+          <p class="footer-brand-desc">Business intelligence consulting that helps organizations transform data into decisions. Built on integrity. Delivered with precision.</p>
+        </div>
+        <div>
+          <p class="footer-col-title">Services</p>
+          <ul class="footer-col-links">
+            <li><a href="#services">BI Strategy</a></li>
+            <li><a href="#services">Data Architecture</a></li>
+            <li><a href="#services">Dashboard &amp; Reporting</a></li>
+            <li><a href="#services">Predictive Analytics</a></li>
+            <li><a href="#services">Data Governance</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Company</p>
+          <ul class="footer-col-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#industries">Industries</a></li>
+            <li><a href="#insights">Insights</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Connect</p>
+          <ul class="footer-col-links">
+            <li><a href="mailto:info@assurancesconsulting.com">info@assurancesconsulting.com</a></li>
+            <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Assurance Consulting LLC. All rights reserved.</p>
+        <nav class="footer-legal" aria-label="Legal links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ SCRIPTS ═══ -->
+  <script>
+    /* ── Scroll-triggered nav style ── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    /* ── Mobile nav toggle ── */
+    function toggleMobile(btn) {
+      const menu = document.getElementById('navMobile');
+      const open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    }
+    function closeMobile() {
+      document.getElementById('navMobile').classList.remove('open');
+    }
+
+    /* ── Scroll reveal ── */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+      { threshold: 0.12 }
+    );
+    reveals.forEach(el => observer.observe(el));
+
+    /* ── Contact form (Formspree AJAX) ── */
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('formSuccess');
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            form.style.display = 'none';
+            success.style.display = 'block';
+          } else {
+            alert('Something went wrong. Please email us directly at info@assurancesconsulting.com');
+          }
+        } catch {
+          alert('Network error. Please email us directly at info@assurancesconsulting.com');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
