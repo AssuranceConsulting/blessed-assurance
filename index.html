@@ -422,10 +422,10 @@
     /* ─── SERVICES ───────────────────────────────────────────── */
     #services { background: var(--white); }
     .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      ditemplate-columns: repeat(3, 1fr);
       gap: 2px;
-      background: var(--gray-line);
+      background: splay: grid;
+      grid-var(--gray-line);
     }
     .service-card {
       background: var(--white);
@@ -995,23 +995,12 @@
 
         <div class="service-card reveal">
           <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <rect x="6" y="6" width="32" height="32" rx="2"/>
-            <polyline points="14,30 20,22 26,26 34,16"/>
-            <circle cx="34" cy="16" r="2" fill="currentColor"/>
+            <path d="M8 36L22 8l14 28"/>
+            <path d="M13 26h18"/>
+            <circle cx="22" cy="8" r="2" fill="currentColor"/>
           </svg>
-          <h3 class="service-title">BI Strategy &amp; Roadmapping</h3>
-          <p class="service-desc">We assess your current analytics maturity and co-develop a prioritized roadmap aligned to your strategic objectives — ensuring every investment in data delivers measurable value.</p>
-          <span class="service-link">Learn More →</span>
-        </div>
-
-        <div class="service-card reveal">
-          <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <ellipse cx="22" cy="14" rx="14" ry="5"/>
-            <path d="M8 14v8c0 2.76 6.27 5 14 5s14-2.24 14-5v-8"/>
-            <path d="M8 22v8c0 2.76 6.27 5 14 5s14-2.24 14-5v-8"/>
-          </svg>
-          <h3 class="service-title">Data Architecture &amp; Warehousing</h3>
-          <p class="service-desc">We design and implement scalable data warehouses, lakes, and lakehouse architectures that consolidate your disparate sources into a single, reliable source of truth.</p>
+          <h3 class="service-title">Business Strategy &amp; Planning</h3>
+          <p class="service-desc">We work alongside leadership to clarify goals, evaluate options, and build actionable strategic plans — grounded in market realities and your organization's actual capacity to execute.</p>
           <span class="service-link">Learn More →</span>
         </div>
 
@@ -1019,8 +1008,8 @@
           <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
             <rect x="6" y="10" width="32" height="24" rx="2"/>
             <path d="M6 18h32"/>
-            <path d="M16 10v8M28 10v8"/>
-            <path d="M12 26h4M20 26h4M28 26h4"/>
+            <polyline points="12,27 18,22 24,25 32,19"/>
+            <circle cx="32" cy="19" r="1.5" fill="currentColor"/>
           </svg>
           <h3 class="service-title">Dashboard &amp; Reporting</h3>
           <p class="service-desc">We build executive dashboards and operational reports in Power BI, Tableau, or your preferred platform — designed for clarity, speed, and real-time decision-making.</p>
@@ -1029,41 +1018,56 @@
 
         <div class="service-card reveal">
           <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <rect x="6" y="8" width="32" height="28" rx="2"/>
+            <path d="M6 16h32"/>
+            <path d="M14 12h2M20 12h2"/>
+            <path d="M12 24h6M12 30h8M26 24h6M26 30h4"/>
+          </svg>
+          <h3 class="service-title">Financial Analysis</h3>
+          <p class="service-desc">From budget modeling to variance analysis and cost-benefit assessments, we provide the financial clarity leadership needs to allocate resources with confidence and accountability.</p>
+          <span class="service-link">Learn More →</span>
+        </div>
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M10 34V20l12-12 12 12v14"/>
+            <rect x="17" y="26" width="10" height="8"/>
+            <path d="M22 26v8"/>
+            <path d="M6 34h32"/>
+          </svg>
+          <h3 class="service-title">Procurement &amp; Vendor Management</h3>
+          <p class="service-desc">We evaluate procurement processes, assess vendor performance, and implement sourcing strategies that reduce costs, mitigate risk, and strengthen supplier relationships over time.</p>
+          <span class="service-link">Learn More →</span>
+        </div>
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
             <circle cx="22" cy="22" r="14"/>
-            <path d="M22 8v14l8 8"/>
+            <path d="M22 10v12l7 7"/>
+            <path d="M10 22h4M30 22h4M22 10v4M22 34v-4"/>
           </svg>
           <h3 class="service-title">Predictive Analytics</h3>
-          <p class="service-desc">We develop and deploy statistical and machine learning models that move your organization from describing the past to anticipating the future — with explainable, auditable results.</p>
+          <p class="service-desc">We apply analytical modeling to help organizations anticipate demand, forecast financial performance, and identify trends — translating past data into forward-looking insight.</p>
           <span class="service-link">Learn More →</span>
         </div>
 
         <div class="service-card reveal">
           <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <path d="M22 6L6 16v12l16 10 16-10V16z"/>
-            <path d="M22 6v22M6 16l16 6 16-6"/>
+            <rect x="6" y="6" width="14" height="14" rx="1.5"/>
+            <rect x="24" y="6" width="14" height="14" rx="1.5"/>
+            <rect x="6" y="24" width="14" height="14" rx="1.5"/>
+            <rect x="24" y="24" width="14" height="14" rx="1.5"/>
+            <path d="M20 13h4M13 20v4M31 20v4M20 31h4"/>
           </svg>
-          <h3 class="service-title">Data Governance &amp; Quality</h3>
-          <p class="service-desc">We establish governance frameworks, data cataloging, lineage tracking, and quality controls that ensure your organization can trust the numbers behind every decision.</p>
-          <span class="service-link">Learn More →</span>
-        </div>
-
-        <div class="service-card reveal">
-          <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <circle cx="16" cy="16" r="6"/>
-            <circle cx="30" cy="28" r="6"/>
-            <path d="M20 18l6 6"/>
-            <path d="M30 14h4M36 14h-4v4"/>
-            <path d="M10 30h-4M8 30h4v-4"/>
-          </svg>
-          <h3 class="service-title">Analytics Enablement &amp; Training</h3>
-          <p class="service-desc">We transfer capability into your organization through tailored training, embedded analytics coaches, and self-service frameworks that make your team analytically self-sufficient.</p>
+          <h3 class="service-title">Project Management</h3>
+          <p class="service-desc">We plan, coordinate, and drive cross-functional initiatives from kickoff to close — keeping scope, timelines, and stakeholders aligned so your strategic priorities actually get delivered.</p>
           <span class="service-link">Learn More →</span>
         </div>
 
       </div>
     </div>
   </section>
-
+  
   <!-- ═══ INDUSTRIES ═══ -->
   <section id="industries" aria-labelledby="industries-heading">
     <div class="section-inner">
